@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>MT - Form</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+  <style>
+    .my-padding {
+      margin-top: 5%;
+    }
+
+    .no-margin-bottom {
+      margin-bottom: 0px;
+    }
+
+    .my-height {
+      height: 580px;
+    }
+
+    #finish {
+      font-size: 0.8rem;
+      border-radius: 10rem;
+      padding: 0.75rem 1rem;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function () {
+      var pid = sessionStorage.getItem("new_PID");
+      var ppass = sessionStorage.getItem("new_PPASS");;
+      // console.log(did);
+      // console.log(dpass);
+
+
+      $("#finish").click(function () {
+
+        var addLoc = "http://localhost:3000/api/Patient";
+        var name = $("#fullname").val();
+        var ret = name.split(" ");
+        var date = $("#dob").val();
+        var dret = date.split("-");
+        var date = "" + dret[2] + "/" + dret[1] + "/" + dret[0];
+        // console.log(ret[0]);
+        // console.log(ret[1]);
+        // console.log(date);
+        var contact = $("#contact").val();
+        var email = $("#email").val();
+        var st = $("#st").val();
+        var city = $("#city").val();
+        var state = $("#state").val();
+        var zip = $("#zip").val();
+
+        var efn1 = $("#ecfullname").val();
+        var ec1 = efn1.split(" ");
+        var ec1c = $("#eccontact").val();
+        var ec1e = $("#ecemail").val();
+
+        var efn2 = $("#ec2fullname").val();
+        var ec2 = efn2.split(" ");
+        var ec2c = $("#ec2contact").val();
+        var ec2e = $("#ec2email").val();
+
+        var all = $("#all").val();
+        var heri = $("#heri").val();
+        var ps = $("#ps").val();
+        var bg = $("#bg").val();
+
+
+        var payload = {
+          "$class": "meditrack.com.Patient",
+          "patientId": pid,
+          "firstName": ret[0],
+          "lastName": ret[1],
+          "address": st,
+          "city": city,
+          "state": state,
+          "zipcode": zip,
+          "ec1FirstName": ec1[0],
+          "ec1LastName": ec1[1],
+          "ec1relation": "Mother",
+          "ec1contactNo": ec1c,
+          "ec1email": ec1e,
+          "ec2FirstName": ec2[0],
+          "ec2LastName": ec2[1],
+          "ec2relation": "Father",
+          "ec2contactNo": ec2c,
+          "ec2email": ec2e,
+          "gender": " ",
+          "allergies": all,
+          "hereditary": heri,
+          "bloodGroup": bg,
+          "surgery": ps,
+          "contactNo": contact,
+          "email": email,
+          "password": ppass,
+          "birthdate": date,
+          "balance": 0,
+          "authDoctors": []
+        };
+        // console.log(payload);
+        axios.post(addLoc, payload)
+          .then(function (response) {
+            // Do a toast 
+            alert("Transaction successful.");
+            window.location.replace("login.html");
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+      });
+
+    });
+  </script>
+
+</head>
+
+<body class="bg-gradient-info">
+
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+
+      <div class="col-xl-8 col-lg-8 shadow mb-4 my-padding my-height">
+        <div class="card shadow mb-4 my-height">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-info">Other Details</h6>
+            <div class="dropdown no-arrow"></div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="chart-area">
+              <form class="user" action="" method="post">
+                <div class="form-group row no-margin-bottom">
+                  <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend "><span class="input-group-text"
+                          id="inputGroupPrepend2">Pt.</span></div>
+                      <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name"
+                        aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text" id="inputGroupPrepend2">#</span>
+                      </div>
+                      <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact No."
+                        aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <input type="date" id="dob" class="form-control" name="trip-start">
+                  </div>
+                  <div class="col-md-7"><input type="text" class="form-control" id="email" placeholder="Email Id.">
+                  </div>
+
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-4 mb-3">
+                    <!-- <label for="validationCustom03">City</label> -->
+                    <input type="text" class="form-control" id="st" placeholder="Street" required>
+
+                  </div>
+
+                  <div class="col-md-3 mb-3">
+                    <!-- <label for="validationCustom03">City</label> -->
+                    <input type="text" class="form-control" id="city" placeholder="City" required>
+
+                  </div>
+                  <div class="col-md-2 mb-3">
+                    <!-- <label for="validationCustom04">State</label> -->
+                    <input type="text" class="form-control" id="state" placeholder="State" required>
+
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <!-- <label for="validationCustom05">Zip</label> -->
+                    <input type="text" class="form-control" id="zip" placeholder="Zip" required>
+
+                  </div>
+                </div>
+                <!-- <hr> -->
+
+                <div class="form-row">
+                  <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend "><span class="input-group-text bg-info text-white"
+                          id="inputGroupPrepend2">EC1</span></div>
+                      <input type="text" class="form-control" id="ecfullname" name="" placeholder="Mother's Full Name"
+                        aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend "><span class="input-group-text bg-info text-white"
+                          id="inputGroupPrepend2">EC1</span></div>
+                      <input type="text" class="form-control" id="ecemail" name="" placeholder="Email"
+                        aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend "><span class="input-group-text bg-info text-white"
+                          id="inputGroupPrepend2">EC1</span></div>
+                      <input type="text" class="form-control" id="eccontact" name="" placeholder="Contact"
+                        aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend "><span class="input-group-text bg-info text-white"
+                          id="inputGroupPrepend2">EC2</span></div>
+                      <input type="text" class="form-control" id="ec2fullname" name="" placeholder="Father's Full Name"
+                        aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend "><span class="input-group-text bg-info text-white"
+                          id="inputGroupPrepend2">EC2</span></div>
+                      <input type="text" class="form-control" id="ec2email" name="" placeholder="Email"
+                        aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text bg-info text-white"
+                          id="inputGroupPrepend2">EC2</span>
+                      </div>
+                      <input type="text" class="form-control" id="ec2contact" name="" placeholder="Contact"
+                        aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+
+                <div class="form-group row">
+                  <div class="col-md-6"><input type="text" class="form-control" id="ps" placeholder="Past Surgery(s)">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="heri" placeholder="Heriditary Disease(s)">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-9"><input type="text" class="form-control" id="all" placeholder="Allergy(s)">
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control" id="bg" placeholder="Bloodgroup">
+                  </div>
+                </div>
+
+
+              </form>
+              <hr>
+
+              <div class="form-group row">
+                <div class="col-md-5 mb-4">
+
+                </div>
+                <div class="col-md-4 mb-4"></div>
+                <div class="col-md-3 mb-4">
+                  <button class="btn btn-info btn-user btn-block" name="" id="finish">
+                    Finish
+                  </button>
+                </div>
+              </div>
+
+              <!-- </form> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

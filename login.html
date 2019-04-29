@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>MT - Login</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet" />
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.css" rel="stylesheet" />
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      var fetchedData;
+      var userType;
+      $(".getUserDetails").click(function () {
+        var username = $("#username").val();
+        switch (username.charAt(0).toUpperCase()) {
+          case "D":
+            userType = "D";
+            var location = "http://localhost:3000/api/Doctor/" + username.toUpperCase();
+            axios.get(location)
+              .then(function (response) {
+                fetchedData = response.data;
+                $(".greetingTitle").text("Welcome Dr. " + fetchedData.firstName + " 💉");
+                $(".password1").css("visibility", "visible");
+                $(".getUserDetails").css("display", "none");
+                $(".getLogin").css("display", "inline-block");
+              })
+              .catch(function (error) {
+                console.log(error);
+                alert("Doctor with License No " + username.toUpperCase() + " not found in the system.");
+              })
+            break;
+          case "P":
+            userType = "P";
+            var location = "http://localhost:3000/api/Patient/" + username.toUpperCase();
+            axios.get(location)
+              .then(function (response) {
+                fetchedData = response.data;
+                $(".greetingTitle").text("Welcome " + fetchedData.firstName + " 😇");
+                $(".password1").css("visibility", "visible");
+                $(".getUserDetails").css("display", "none");
+                $(".getLogin").css("display", "inline-block");
+              })
+              .catch(function (error) {
+                alert("Patient with Aadhar No " + username.toUpperCase() + " not found in the system.");
+              })
+            break;
+          case "I":
+            userType = "I";
+            var location = "http://localhost:3000/api/Institute/" + username.toUpperCase();
+            axios.get(location)
+              .then(function (response) {
+                fetchedData = response.data;
+                $(".greetingTitle").text("Welcome " + fetchedData.name + " 🏥");
+                $(".password1").css("visibility", "visible");
+                $(".getUserDetails").css("display", "none");
+                $(".getLogin").css("display", "inline-block");
+              })
+              .catch(function (error) {
+                alert("Institue No " + username.toUpperCase() + " not found in the system.");
+              })
+            break;
+          default:
+            alert("Please enter a valid user detail");
+            break;
+        }
+      });
+
+      $(".getLogin").click(function () {
+        // console.log(fetchedData);
+        // console.log(userType);
+        // console.log($("#password").val());
+        switch (userType) {
+          case "D":
+            if ($("#password").val() == fetchedData.password) {
+              sessionStorage.setItem("D_doctorId", fetchedData.doctorId);
+              sessionStorage.setItem("D_firstName", fetchedData.firstName);
+              sessionStorage.setItem("D_lastName", fetchedData.lastName);
+              sessionStorage.setItem("D_birthdate", fetchedData.birthdate);
+              sessionStorage.setItem("D_contactNo", fetchedData.contactNo);
+              sessionStorage.setItem("D_email", fetchedData.email);
+              sessionStorage.setItem("D_gender", fetchedData.gender);
+              sessionStorage.setItem("D_specialisation", fetchedData.specialisation);
+              sessionStorage.setItem("D_qualification", fetchedData.qualification);
+              sessionStorage.setItem("D_balance", fetchedData.balance);
+              window.location.replace("d-index.html");
+            } else {
+              alert("Incorrect Password");
+            }
+            break;
+          case "P":
+            if ($("#password").val() == fetchedData.password) {
+              sessionStorage.setItem("P_patientId", fetchedData.patientId);
+              sessionStorage.setItem("P_firstName", fetchedData.firstName);
+              sessionStorage.setItem("P_lastName", fetchedData.lastName);
+              window.location.replace("p-index.html");
+            } else {
+              alert("Incorrect Password");
+            }
+            break;
+          case "I":
+            if ($("#password").val() != "") {
+              sessionStorage.setItem("I_instituteID", fetchedData.instituteId);
+              sessionStorage.setItem("I_name", fetchedData.name);
+              window.location.replace("i-index.html");
+            } else {
+              alert("Incorrect Password");
+            }
+            break;
+        }
+      });
+
+    });
+  </script>
+</head>
+
+<body class="bg-gradient-primary">
+  <div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+      <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4 greetingTitle">Welcome Back!</h1>
+                  </div>
+                  <form class="user" method="post" action="">
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" required name="username" id="username"
+                        aria-describedby="emailHelp" placeholder="Enter Username" />
+                    </div>
+                    <div class="form-group password1" style="visibility: hidden">
+                      <input type="password" name="password" required class="form-control form-control-user"
+                        id="password" placeholder="Password" />
+                    </div>
+                    <input type="button" name="getUserDetails" value="Find User"
+                      class="btn btn-primary btn-user btn-block getUserDetails" />
+                    <input type="button" name="submit" value="Login" class="btn btn-primary btn-user btn-block getLogin"
+                      style="display: none;" /> <!-- inline-block on click -->
+
+                    <!-- <hr> -->
+                    <!-- <a href="index.html" class="btn btn-google btn-user btn-block">
+                      <i class="fab fa-google fa-fw"></i> Login with Google
+                    </a> -->
+                    <!-- <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                      <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                    </a> -->
+                  </form>
+                  <hr />
+                  <div class="text-center">
+                    <!-- <a class="small" href="forgot-password.html">Forgot Password?</a> -->
+                  </div>
+                  <div class="text-center">
+                    <a class="small" href="register.html">Create an Account!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

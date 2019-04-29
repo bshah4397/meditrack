@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+</head>
+<title>
+    OTP VERIFICATION
+</title>
+<body>
+    <form id="myform" method="post">
+        <!-- <label>user_email</label> -->
+        <input type="hidden" id="user_email" name="user_email" value="aryan.shah272002@gmail.com"/>     <!--set the email here dynamically-->
+        <!-- <label>otp</label>  -->
+        <input type="hidden" id="otp" name="otp" value="1091"/>                                         <!--set the otp here dynamically-->
+        <br><br>
+        <button>Send</button>
+    </form>
+<script type="text/javascript">
+           (function(){
+              emailjs.init("user_aFfY2WqirymTgc2Pt3UzV");
+           })();
+</script>
+<script>
+$(document).ready(function () {
+  //your code here
+  var myform = $("form#myform");
+        myform.submit(function(event){
+            event.preventDefault();
+        
+          // Change to your service ID, or keep using the default service
+          var service_id = "default_service";
+          var template_id = "otp";
+        
+          myform.find("button").text("Sending...");
+          emailjs.sendForm(service_id,template_id,myform[0])
+              .then(function(){ 
+                alert("Sent!");
+               myform.find("button").text("Send");
+            }, function(err) {
+               alert("Send email failed!\r\n Response:\n " + JSON.stringify(err));
+               myform.find("button").text("Send");
+            });
+          return false;
+        });
+});
+        
+        </script>
+</body>
+
