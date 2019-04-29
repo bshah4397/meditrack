@@ -1,0 +1,309 @@
+{
+    "$class": "meditrack.com.Doctor",
+    "doctorId": "D-6990",
+    "firstName": "Adam",
+    "lastName": "Smith",
+    "birthdate": "05/02/1988",
+    "contactNo": "9947034587",
+    "email": "adam@gmail.com",
+    "address": "Beaver St.",
+    "city": "New York",
+    "state": "NY",
+    "zipcode": "11400",
+    "password": "adam@123",
+    "gender": "Male",
+    "specialisation": "Cardiovascular",
+    "qualification": "M.S",
+    "balance": 0
+  }
+  
+  {
+    "$class": "meditrack.com.Doctor",
+    "doctorId": "D-6991",
+    "firstName": "Paul",
+    "lastName": "Avery",
+    "birthdate": "05/11/1977",
+    "contactNo": "4022798182",
+    "email": "paul@gmail.com",
+    "address": "2231 Crummit Lane",
+    "city": "Hardy",
+    "state": "NE",
+    "zipcode": "68934",
+    "password": "paul@123",
+    "gender": "Male",
+    "specialisation": "",
+    "qualification": "M.B.B.S",
+    "balance": 0
+  }
+  ——————————————————
+  {
+    "$class": "meditrack.com.Doctor",
+    "doctorId": "D-6992",
+    "firstName": "Jeffrey",
+    "lastName": "Garland",
+    "birthdate": "21/09/1984",
+    "contactNo": "9285652037",
+    "email": "jeffrey@gmail.com",
+    "address": "2316 Skips Lane",
+    "city": "Golden Valley",
+    "state": "AZ",
+    "zipcode": "86413",
+    "password": "jeffrey@123",
+    "gender": "Male",
+    "specialisation": "",
+    "qualification": "M.B.B.S",
+    "balance": 0
+  }
+  
+  {
+    "$class": "meditrack.com.Doctor",
+    "doctorId": "D-6993",
+    "firstName": "Dina",
+    "lastName": "Espinosa",
+    "birthdate": "21/09/1980",
+    "contactNo": "5168135448",
+    "email": "dina@gmail.com",
+    "address": "3040 Westwood Avenue",
+    "city": "New York",
+    "state": "NY",
+    "zipcode": "10013",
+    "password": "dina@123",
+    "gender": "Female",
+    "specialisation": "Oncology",
+    "qualification": "M.S",
+    "balance": 0
+  }
+  
+  {
+    "$class": "meditrack.com.Doctor",
+    "doctorId": "D-6994",
+    "firstName": "Myra",
+    "lastName": "Alvardo",
+    "birthdate": "06/04/1990",
+    "contactNo": "9378488761",
+    "email": "myra@gmail.com",
+    "address": "Crim Lane",
+    "city": "Bellbrook",
+    "state": "OH",
+    "zipcode": "45305",
+    "password": "myra@123",
+    "gender": "Female",
+    "specialisation": "Orthopedics",
+    "qualification": "M.S",
+    "balance": 0
+  }
+  
+  Patient
+  
+  {
+    "$class": "meditrack.com.Patient",
+    "patientId": "P-1000",
+    "firstName": "Tracey",
+    "lastName": "Roland",
+    "address": "3171 North Avenue",
+    "city": "Brunswick",
+    "state": "NE",
+    "zipcode": "69720",
+    "ec1FirstName": "Mary",
+    "ec1LastName": "Roland",
+    "ec1relation": "Mother",
+    "ec1contactNo": "4028427611",
+    "ec1email": "mary@gmail.com",
+    "ec2FirstName": "John",
+    "ec2LastName": "Roland",
+    "ec2relation": "Brother",
+    "ec2contactNo": "4028427612",
+    "ec2email": "john@gmail.com",
+    "gender": "Female",
+    "allergies": "Peanut Butter",
+    "hereditary": "Coronary heart disease",
+    "bloodGroup": "O+",
+    "surgery": "None",
+    "contactNo": "4028427610",
+    "email": "tracey@gmail.com",
+    "password": "tracey@123",
+    "birthdate": "21/11/1999",
+    "balance": 0,
+    "authDoctors": [
+      "resource:meditrack.com.Doctor#D-6990",
+      "resource:meditrack.com.Doctor#D-6991"
+    ]
+  }
+  
+  {
+    "$class": "meditrack.com.Patient",
+    "patientId": "P-1001",
+    "firstName": "Thomas",
+    "lastName": "Bellows",
+    "address": "560 Nash St",
+    "city": "Southfiled",
+    "state": "MI",
+    "zipcode": "48075",
+    "ec1FirstName": "Sandra",
+    "ec1LastName": "Bellows",
+    "ec1relation": "Sister",
+    "ec1contactNo": "3132026018",
+    "ec1email": "sandra@gmail.com",
+    "ec2FirstName": "Jason",
+    "ec2LastName": "Bellows",
+    "ec2relation": "Brother",
+    "ec2contactNo": "3132026019",
+    "ec2email": "jason@gmail.com",
+    "gender": "Male",
+    "allergies": "Dogs",
+    "hereditary": "None",
+    "bloodGroup": "A+",
+    "surgery": "Lasic Eye Surgery",
+    "contactNo": "3132026017",
+    "email": "thomas@gmail.com",
+    "password": "thomas@123",
+    "birthdate": "04/02/1995",
+    "balance": 0,
+    "authDoctors": [
+      "resource:meditrack.com.Doctor#D-6990"
+    ]
+  }
+  
+  {
+    "$class": "meditrack.com.Patient",
+    "patientId": "P-1002",
+    "firstName": "William",
+    "lastName": "Geiger",
+    "address": "23 American Drive",
+    "city": "Fort Walton Beach",
+    "state": "FL",
+    "zipcode": "232548",
+    "ec1FirstName": "Sansa",
+    "ec1LastName": "Geiger",
+    "ec1relation": "Mother",
+    "ec1contactNo": "8509740988",
+    "ec1email": "sansa@gmail.com",
+    "ec2FirstName": "Samual",
+    "ec2LastName": "Geiger",
+    "ec2relation": "Brother",
+    "ec2contactNo": "8509740989",
+    "ec2email": "samual@gmail.com",
+    "gender": "Male",
+    "allergies": "Seasonal",
+    "hereditary": "Alzheimer's",
+    "bloodGroup": "A-",
+    "surgery": "None",
+    "contactNo": "8509740987",
+    "email": "william@gmail.com",
+    "password": "william@123",
+    "birthdate": "05/12/1987",
+    "balance": 0,
+    "authDoctors": []
+  }
+  
+  
+  
+  Institutes
+  
+  {
+    "$class": "meditrack.com.Institute",
+    "instituteId": "I-6000",
+    "name": "Olympus Medical Center",
+    "address": "460 Point Street",
+    "city": "Chicago",
+    "state": "IL",
+    "zipcode": "60644",
+    "instituteType": "Hospital",
+    "balance": 0
+  }
+  
+  {
+    "$class": "meditrack.com.Institute",
+    "instituteId": "I-6001",
+    "name": "Horner Medical Clinic",
+    "address": "245 Horner Street",
+    "city": "Akron",
+    "state": "OH",
+    "zipcode": "44307",
+    "instituteType": "Clinic",
+    "balance": 0
+  }
+  
+
+  {
+    "$class": "meditrack.com.Record",
+    "recordId": "R-0001",
+    "diagnosis": "DIABETES MELLITUS (ICD-250.)",
+    "prescription": "PRINIVIL TABS 20 MG (LISINOPRIL) 1 po qd<br>Last Refill: #30 x 2 : Carl Savem MD (08/27/2010)",
+    "comments": "Consultation",
+    "patient": "resource:meditrack.com.Patient#P-1000",
+    "doctor": "resource:meditrack.com.Doctor#D-6990",
+    "institute": "resource:meditrack.com.Institute#I-6000"
+  }
+
+  {
+    "$class": "meditrack.com.Record",
+    "recordId": "R-0002",
+    "diagnosis": "HYPERTENSION, BENIGN ESSENTIAL (ICD-401.1)",
+    "prescription": "HUMULIN INJ 70/30 (INSULIN REG & ISOPHANE (HUMAN)) 20 units ac breakfast<br>Last Refill: #600 u x 0 : Carl Savem MD (08/27/2010)",
+    "comments": "Consultation",
+    "patient": "resource:meditrack.com.Patient#P-1000",
+    "doctor": "resource:meditrack.com.Doctor#D-6990",
+    "institute": "resource:meditrack.com.Institute#I-6000"
+  }
+
+  {
+    "$class": "meditrack.com.Record",
+    "recordId": "R-0003",
+    "diagnosis": "Blood pressure is lower. Feet are inspected and there are no callouses, no compromised skin. No vision complaints.",
+    "prescription": "HUMULIN INJ 70/30 20 u ac breakfast<br>PRINIVIL TABS 20 MG 1 qd",
+    "comments": "Consultation",
+    "patient": "resource:meditrack.com.Patient#P-1000",
+    "doctor": "resource:meditrack.com.Doctor#D-6991",
+    "institute": "resource:meditrack.com.Institute#I-6000"
+  }
+
+  {
+    "$class": "meditrack.com.Record",
+    "recordId": "R-0004",
+    "diagnosis": "Common Cold",
+    "prescription": "Acetaminophen or Ibuprofen",
+    "comments": "Consultation",
+    "patient": "resource:meditrack.com.Patient#P-1000",
+    "doctor": "resource:meditrack.com.Doctor#D-6991",
+    "institute": "resource:meditrack.com.Institute#I-6001"
+  }
+
+  {
+    "$class": "meditrack.com.Record",
+    "recordId": "R-0005",
+    "diagnosis": "There is a slight blunt in the right lung. ",
+    "prescription": "Daily body activity of 30+ mins.",
+    "comments": "Chest XRay",
+    "labReports": [
+        "https://www.med-ed.virginia.edu/courses/rad/cxr/web%20images/B--effusion-pa.jpg"
+    ],
+    "patient": "resource:meditrack.com.Patient#P-1001",
+    "doctor": "resource:meditrack.com.Doctor#D-6990",
+    "institute": "resource:meditrack.com.Institute#I-6001"
+  }
+
+  {
+    "$class": "meditrack.com.Record",
+    "recordId": "R-0006",
+    "diagnosis": "Tibia(Bone) Fracture",
+    "prescription": "Acetaminophen (Tylenol, others) or Ibuprofen (Advil, Motrin IB, others) or a combination of the two. If severe pain, I'll might prescribe stronger pain medications.",
+    "comments": "Aid + XRay",
+    "labReports": [
+        "https://www.orthoatlanta.com/storage/meta/orthoatlanta_facts_about_bone_fractures_image_1-resize.jpg"
+    ],
+    "patient": "resource:meditrack.com.Patient#P-1001",
+    "doctor": "resource:meditrack.com.Doctor#D-6990",
+    "institute": "resource:meditrack.com.Institute#I-6001"
+  }
+
+  {
+    "$class": "meditrack.com.Record",
+    "recordId": "R-0007",
+    "diagnosis": "Common Fever",
+    "prescription": "Acetaminophen / Ibuprofen / Naproxen sodium / Aspirin",
+    "comments": "Consultation",
+    "patient": "resource:meditrack.com.Patient#P-1001",
+    "doctor": "resource:meditrack.com.Doctor#D-6990",
+    "institute": "resource:meditrack.com.Institute#I-6000"
+  }

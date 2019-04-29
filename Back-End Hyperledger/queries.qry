@@ -1,0 +1,20 @@
+query getDoctorDashboardRecords {
+  description: "Retrieve the records which are associated to a specific doctor"
+  statement: 
+    SELECT meditrack.com.Record
+    WHERE (doctor == _$doctor)
+}
+
+query getPatientDashboardRecords {
+  description: "Retrieve the records which are associated to a specific patient"
+  statement: 
+    SELECT meditrack.com.Record
+    WHERE (patient == _$patient)
+}
+
+query getInstituteDashboardRecords {
+  description: "Retrieve the records which are associated to a specific patient"
+  statement: 
+    SELECT meditrack.com.Record
+    WHERE (institute == _$institute)
+}

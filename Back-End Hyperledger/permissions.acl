@@ -1,0 +1,179 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+rule AllAccess {
+  description: "AllAccess - grant everything to everybody"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule P1_PatientViewPatient {
+  description: "Patients can view/update themselves"
+  participant(p): "meditrack.com.Patient"
+  operation: READ,UPDATE
+  resource(r): "meditrack.com.Patient"
+  condition: (r.getIdentifier() === p.getIdentifier())
+  action: ALLOW
+}
+
+rule P2_PatientViewAllDoctors {
+  description: "Patient can view information about all doctors"
+  participant: "meditrack.com.Patient"
+  operation: READ
+  resource: "meditrack.com.Doctor"
+  action: ALLOW
+}
+
+rule P3_PatientViewAllInstitutes {
+  description: "Patient can view information about all Institutes"
+  participant: "meditrack.com.Patient"
+  operation: READ
+  resource: "meditrack.com.Institute"
+  action: ALLOW
+}
+
+rule P4_PatientViewHisOwnRecords {
+  description: "Patients can view only his/her own records"
+  participant(p): "meditrack.com.Patient"
+  operation: READ
+  resource(r): "meditrack.com.Record"
+  condition: (r.patient.getIdentifier() === p.getIdentifier())
+  action: ALLOW
+}
+
+rule D1_DoctorViewPatient {
+  description: "Doctors can view patients it is authorised to"
+  participant(p): "meditrack.com.Doctor"
+  operation: READ
+  resource(r): "meditrack.com.Patient"
+  condition:( r.authDoctors.some(function(doctor)
+    {
+      return doctor.getIdentifier() === p.getIdentifier();
+    })
+    )
+  action: ALLOW
+}
+
+rule D2_DoctorViewUpdateDoctor {
+  description: "Doctor can view/update his own information"
+  participant(p): "meditrack.com.Doctor"
+  operation: READ,UPDATE
+  resource(r): "meditrack.com.Doctor"
+  condition: (r.getIdentifier() === p.getIdentifier())
+  action: ALLOW
+}
+
+rule D3_DoctorCanViewAllInstitutes {
+  description: "Doctor can view all institutes"
+  participant: "meditrack.com.Doctor"
+  operation: READ
+  resource: "meditrack.com.Institute"
+  action: ALLOW
+}
+
+rule D4_DoctorCanViewCreateRecordsIfAuthorised {
+  description: "Doctor can view/create records of patients it is authorised to"
+  participant(p): "meditrack.com.Doctor"
+  operation: READ,CREATE
+  resource(r): "meditrack.com.Record"
+  condition:( r.patient.authDoctors.some(function(doctor){
+    return doctor.getIdentifier() === p.getIdentifier();
+  })
+  )
+  action: ALLOW
+}
+
+rule I1_InstituteViewUpdateItsOwnInformation {
+  description: "Institute can view/update information about Itself"
+  participant(p): "meditrack.com.Institute"
+  operation: READ,UPDATE
+  resource(r): "meditrack.com.Institute"
+  condition:(p.getIdentifier() === r.getIdentifier())
+  action: ALLOW
+}
+
+rule I2_InstituteViewItsOwnRecords {
+  description: "Institute can view only those records in which instituteID is mentioned"
+  participant(p): "meditrack.com.Institute"
+  operation: READ
+  resource(r): "meditrack.com.Record"
+  condition: (r.institute.getIdentifier() === p.getIdentifier())
+  action: ALLOW
+}
+
+rule AllPatientsGrantAccess {
+  description: "All Patients can Grant Access"
+  participant: "meditrack.com.Patient"
+  operation: ALL
+  resource: "meditrack.com.GrantAccess"
+  action: ALLOW
+}
+
+rule AllPatientsRevokeAccess {
+  description: "All Patients can Revoke Access"
+  participant: "meditrack.com.Patient"
+  operation: ALL
+  resource: "meditrack.com.RevokeAccess"
+  action: ALLOW
+}
+
+rule AllPatientsP2I {
+  description: "All Patients can P2I"
+  participant: "meditrack.com.Patient"
+  operation: ALL
+  resource: "meditrack.com.P2I"
+  action: ALLOW
+}
+
+rule AllInstitutesI2D {
+  description: "All Instittues can I2D"
+  participant: "meditrack.com.Institute"
+  operation: ALL
+  resource: "meditrack.com.I2D"
+  action: ALLOW
+}
+
+rule AllInstitutesChangeDoctorBalance {
+  description: "transaction I2D can change doctors balance"
+  participant: "meditrack.com.Institute"
+  operation: READ,UPDATE
+  resource: "meditrack.com.Doctor"
+  action: ALLOW
+}
+
+rule AllPatientsChangeInstituteBalance {
+  description: "transaction P2I can change Institutes balance"
+  participant: "meditrack.com.Patient"
+  operation: READ,UPDATE
+  resource: "meditrack.com.Institute"
+  action: ALLOW
+}

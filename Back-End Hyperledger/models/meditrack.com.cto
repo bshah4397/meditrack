@@ -1,0 +1,113 @@
+  namespace meditrack.com
+
+  /**
+   * Enumerations (Gender,BloodGroup)
+   */
+
+  // enum InstituteType{
+  //   o Hospital
+  //   o Clinic
+  //   o PathologyLaboratory
+  //   o ImagingCenter
+  //   o Other 
+  // }
+
+  /**
+   * participant (Patient,Doctor,Institute)
+   */
+  participant Patient identified by patientId {
+    o String patientId
+    o String firstName
+    o String lastName
+    o String address
+    o String city
+    o String state
+    o String zipcode
+    o String ec1FirstName
+    o String ec1LastName
+    o String ec1relation
+    o String ec1contactNo
+    o String ec1email
+    o String ec2FirstName
+    o String ec2LastName
+    o String ec2relation
+    o String ec2contactNo
+    o String ec2email
+    o String gender
+    o String allergies optional
+    o String hereditary optional
+    o String bloodGroup 
+    o String surgery optional
+    o String contactNo
+    o String email 
+    o String password 
+    o String birthdate
+    o Double balance
+    --> Doctor[] authDoctors optional
+  }
+
+  participant Doctor identified by doctorId {
+    o String doctorId
+    o String firstName
+    o String lastName
+    o String birthdate
+    o String contactNo
+    o String email 
+    o String address
+    o String city
+    o String state
+    o String zipcode
+    o String password
+    o String gender
+    o String specialisation optional
+    o String qualification
+    o Double balance
+  }
+
+  participant Institute identified by instituteId {
+    o String instituteId
+    o String name
+    o String address
+    o String city
+    o String state
+    o String zipcode
+    o String instituteType
+    o Double balance
+  }
+
+  /**
+   * Asset (Records)
+   */
+
+  asset Record identified by recordId {
+     o String recordId
+     o String diagnosis 
+     o String prescription
+     o String comments
+     o String[] labReports optional
+     --> Patient patient
+     --> Doctor doctor
+     --> Institute institute
+   }
+
+  transaction GrantAccess {
+    --> Doctor doctor
+    --> Patient patient
+  }
+
+  transaction RevokeAccess {
+    --> Doctor doctor
+    --> Patient patient
+  }
+
+  transaction P2I {
+    o Double amount
+    --> Patient sender
+    --> Institute collector
+  }
+
+  transaction I2D {
+    o Double amount
+    --> Institute sender
+    --> Doctor collector
+  }
